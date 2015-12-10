@@ -1,0 +1,17 @@
+.cp-color-picker {
+  background-color: white;
+}
+
+.kolor-picker .sampler {
+  border-color: #ebebeb;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAAAXNSR0IArs4c6QAAAgNJREFUWAntlztOw0AURWPRQEPFAgxsBIkGUbABdoBYARsIEhUSDQ0dG0A07AAKGjoa5FAg0VIB4neulBdNRmM7CfHYkeZKV/O15/hl/Mbp9ZJSBFIEUgS6HIFV4Pr4Dt/jU7yGO6kcqif86/mFduegc6AK7MNaW5GOrowVlwOr5vQV2OBCpbZHVO2y2iv+wmd4CUs5LnAI0u3Tno6mPVb6xC7AJe1NXHj97hy33mdeFO2wig9rIO+MWb2q1Iuo7BFFA1apgqkbK7g+x1Gkl+wN10GVjRdcm+NK2ctQOWnKwe0p52u6fpktXODoOmfFsiiG+gvm57gVbbCqohUCC/XpRVT2aEWCfcYCU/69HtZDoG6fUl4TW5PblmudIYusYPeHU08oXbiyug6XaCqDNYBJoPWQoWPc7jG3sg7WFqrbHjrGM5vcVDkprLaHIli2HT4Y07dHo5oFdgCRn/IEq2+PRjUrrK6TjrBORD2Avj0a1X9hDS6zSpPlvGCbZBzdO8GOQjHnykJFdoWHf8TKn+5x68dEefZ7OG9AqYdsRcesKtgfbN8GPoh7KLQKK7AHLOALNQLqFKz47O/O4SLAivEWK8I3ajjqXGSN7YCKgA1akdb20J5WX+t7FoYxZbSusEG7pbJHa9lgjNJrCFqR1vbQntaLqOyhlJeUIpAikCLQwQj8Ad75Juue3l4FAAAAAElFTkSuQmCC);
+}
+
+.kolor-picker input {
+  border-color: #ebebeb;
+  color: #85888f;
+}
+
+.kolor-picker .preview {
+  border-color: #ebebeb;
+}

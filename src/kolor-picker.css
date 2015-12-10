@@ -1,0 +1,83 @@
+.cp-color-picker {
+  background-color: #2f3239;
+  border-radius: 3px;
+}
+
+.cp-xy-slider {
+  width: 240px;
+  height: 178px;
+}
+
+.cp-xy-cursor {
+  height: 15px;
+  width: 15px;
+  border: 2px solid white;
+}
+
+.cp-z-slider {
+  height: 178px;
+}
+
+.cp-z-cursor {
+  border: 0;
+  background-color: white;
+  height: 8px;
+  border-radius: 3px;
+}
+
+.kolor-picker {
+  clear: both;
+  height: 35px;
+  margin: 10px 0;
+  padding-top: 5px;
+}
+
+.kolor-picker .sampler {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #555b60;
+  border-radius: 3px;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAAAXNSR0IArs4c6QAAAhZJREFUWAntl7FOwlAUhkEXWZzcBXkZ4sAL8AaGF9AXwMSJxMWFzRcwLmyOOrC4uRh1MLoaBzVq/f6mxzQX2oKWtsZ7kp/b3nt7z9ef01uo1Xx4B7wD3gHvwL91IAiCdTRAF2iChmijkoYA1kTXyI17OqoFDZBgb1zS2PmwcJdJXkdrbmL6smDFPXGvs/MVO8izJeE26z2gZ44P0arWp23SnKFNlBbvaYO5jgHVRW8oHsectFFaGcTnD3KFSlqMjB3kwhrIix1ktHoQ15Ny5NpPotsMmKxhfQPNXKGSFiORHrKnLKKU8eJg7SaA2U0BShsqHjYGfZRGNmOsVNgtgBapYz2IbbvZQlsSC/YOKd7RaXiU/aEtL9ynCwMmYQuZs4LtKTntAZonDkuHNQBo54HWTU69xm2N3FqSzHTWTcC8rPJ4ZE7dvS7X8wVge8yVg0nxyoB+eywvSDCvs3FY1bi75Qm2uzxSVv4FbEtgXL+H9EbUDXQqDWtwgC63XiNnfloGobMGW0iLIx52KU7/NWcbAF8hxffr1nWGMW1dH5pE6MkvvmYFReJ9ERCfKPxtkABrL4XyYCPgyxA3CEYuaDTuvhTKcdbggLW/O33rs1aOo2o4G4M6jxweW5/aSsJGYDsRsJox6qMRUk0ryq3ZuIsRcB2okxBt+kO7R7k16wLHoOW0ykM1rQdRu0dj1nzf5x3wDmQ78AUqu6QCF8YEagAAAABJRU5ErkJggg==);
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.5;
+}
+
+.kolor-picker .sampler:hover {
+  opacity: 1;
+}
+
+.kolor-picker .preview-block {
+  display: inline-block;
+  vertical-align: middle;
+  float: right;
+}
+
+.kolor-picker input {
+  height: 26px;
+  width: 79px;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  border: 2px solid #555b60;
+  border-radius: 3px;
+  text-align: center;
+  color: white;
+  vertical-align: middle;
+  margin-right: 10px;
+  font-size: 14px;
+  font-family: "SourceSansPro-Regular";
+}
+
+.kolor-picker .preview {
+  display: inline-block;
+  width: 31px;
+  height: 26px;
+  border: 2px solid #555b60;
+  border-radius: 3px;
+  vertical-align: middle;
+}

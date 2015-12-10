@@ -1,0 +1,32 @@
+{
+  "name": "kolor-picker",
+  "version": "0.1.0",
+  "description": "A tinyColorPicker plugin provides sampler function for Canvas.",
+  "main": "build/kolor-picker.js",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-css-to-js": "https://github.com/emn178/gulp-css-to-js.git",
+    "gulp-insert": "^0.5.0",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-uglify": "^1.5.1",
+    "gulp-watch": "^4.3.5",
+    "merge-stream": "^1.0.0",
+    "through2": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emn178/kolor-picker.git"
+  },
+  "keywords": [
+    "color",
+    "picker",
+    "sampler"
+  ],
+  "license": "MIT",
+  "author": "emn178 <emn178@gmail.com>",
+  "homepage": "https://github.com/emn178/kolor-picker",
+  "bugs": {
+    "url": "https://github.com/emn178/kolor-picker/issues"
+  }
+}

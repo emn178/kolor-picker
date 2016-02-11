@@ -1,19 +1,18 @@
-/*
- * kolor-picker v0.1.0
- * https://github.com/emn178/kolor-picker
+/**
+ * [kolor-picker]{@link https://github.com/emn178/kolor-picker}
  *
- * Copyright 2015, emn178@gmail.com
- *
- * Licensed under the MIT license:
- * http://www.opensource.org/licenses/MIT
+ * @version 0.1.1
+ * @author Yi-Cyuan Chen [emn178@gmail.com]
+ * @copyright Yi-Cyuan Chen 2015-2016
+ * @license MIT
  */
-(function ($, window, document) {
+(function ($) {
   'use strict';
 
   var KEY = 'kolor-picker';
 
   function KolorPicker(colorPicker) {
-    this.element = $('<div class="kolor-picker"><div class="sampler"></div><div class="preview-block"><input type="text"/><div class="preview" /></div></div>');
+    this.element = $('<div class="kolor-picker"><div class="sampler"></div><div class="preview-block"><input type="text"/><div class="preview-wrapper"><div class="preview" /></div></div></div>');
     this.colorPicker = colorPicker;
     this.options = colorPicker.color.options;
 
@@ -38,19 +37,18 @@
     }
     this.sampling = false;
     this.lastToggled = false;
-    this.updateColor();
   }
 
   KolorPicker.prototype.onSamplerSelect = function (color) {
     this.sampling = false;
     this.elements.canvas.colorSampler('disable');
-    color = '#' + this.colorPicker.color.colors.HEX;
+    color = this.getColor();
     this.selectColor(color);
   };
 
   KolorPicker.prototype.onSamplerPreview = function (color) {
     this.elements.trigger.css('background-color', color);
-    color = '#' + this.colorPicker.color.setColor(color).HEX;
+    color = this.getColor();
     this.changeColor(color);
   };
 
@@ -72,9 +70,13 @@
     this.colorPicker.toggle(false);
   };
 
+  KolorPicker.prototype.getColor = function () {
+    var rgb = this.colorPicker.color.colors.rgb;
+    return 'rgba(' + [parseInt(rgb.r * 255), parseInt(rgb.g * 255), parseInt(rgb.b * 255), this.colorPicker.color.colors.alpha.toFixed(2)].join(',') + ')';
+  };
 
-  KolorPicker.prototype.updateColor = function (color) {
-    var color = '#' + this.colorPicker.color.colors.HEX;
+  KolorPicker.prototype.updateColor = function () {
+    var color = this.getColor();
     this.elements.preview.css('background-color', color);
     this.elements.input.val(color);
     this.changeColor(color);
@@ -89,9 +91,11 @@
     this.lastToggled = toggled;
     if (toggled === false) {
       if (!this.sampling) {
-        var color = '#' + this.colorPicker.color.colors.HEX;
+        var color = this.getColor();
         this.selectColor(color);
       }
+    } else {
+      this.updateColor();
     }
   };
 
@@ -132,4 +136,4 @@
   $.kolorPicker = {
     theme: {}
   };
-})(jQuery, window, document);
+})(jQuery);

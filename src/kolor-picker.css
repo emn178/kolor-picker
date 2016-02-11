@@ -59,7 +59,7 @@
 
 .kolor-picker input {
   height: 26px;
-  width: 79px;
+  width: 150px;
   background-color: transparent;
   padding: 0;
   margin: 0;
@@ -73,11 +73,16 @@
   font-family: "SourceSansPro-Regular";
 }
 
-.kolor-picker .preview {
+.kolor-picker .preview-wrapper {
   display: inline-block;
   width: 31px;
   height: 26px;
   border: 2px solid #555b60;
   border-radius: 3px;
   vertical-align: middle;
+  background-image: url('data:image/gif;base64,R0lGODlhDAAMAIABAMzMzP///yH5BAEAAAEALAAAAAAMAAwAAAIWhB+ph5ps3IMyQFBvzVRq3zmfGC5QAQA7');
+}
+
+.kolor-picker .preview {
+  height: 100%;
 }

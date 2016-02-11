@@ -60,11 +60,16 @@ body, html, h1, h2 {
   display: inline-block;
 }
 
-.color {
+.color-wrapper {
   display: inline-block;
   width: 35px;
   height: 30px;
   border: 1px solid black;
   vertical-align: middle;
   text-indent: 100%;
+  background-image: url('data:image/gif;base64,R0lGODlhDAAMAIABAMzMzP///yH5BAEAAAEALAAAAAAMAAwAAAIWhB+ph5ps3IMyQFBvzVRq3zmfGC5QAQA7');
+}
+
+.color {
+  height: 100%;
 }

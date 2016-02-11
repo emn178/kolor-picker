@@ -1,12 +1,12 @@
 {
   "name": "kolor-picker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A tinyColorPicker plugin provides sampler function for Canvas.",
   "main": "build/kolor-picker.js",
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
-    "gulp-css-to-js": "https://github.com/emn178/gulp-css-to-js.git",
+    "gulp-css-to-js": "git://github.com/emn178/gulp-css-to-js.git",
     "gulp-insert": "^0.5.0",
     "gulp-minify-css": "^1.2.2",
     "gulp-uglify": "^1.5.1",

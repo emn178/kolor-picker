@@ -1,7 +1,7 @@
 {
   "name": "kolor-picker",
-  "version": "0.1.0",
-  "main": ["build/kolor-picker.js"],
+  "version": "0.1.1",
+  "main": ["src/kolor-picker.js"],
   "ignore": [
     "samples"
   ],

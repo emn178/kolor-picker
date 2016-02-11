@@ -42,6 +42,7 @@
   KolorPicker.prototype.onSamplerSelect = function (color) {
     this.sampling = false;
     this.elements.canvas.colorSampler('disable');
+    this.colorPicker.color.setColor(color);
     color = this.getColor();
     this.selectColor(color);
   };

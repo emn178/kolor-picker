@@ -1,3 +1,7 @@
+# v0.1.2 / 2016-02-18
+
+* Fixed sampler color did not store.
+
 # v0.1.1 / 2016-02-11
 
 * Changed return color to RGBA.

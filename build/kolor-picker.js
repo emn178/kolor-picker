@@ -1,7 +1,7 @@
 /**
  * [kolor-picker]{@link https://github.com/emn178/kolor-picker}
  *
- * @version 0.1.1
+ * @version 0.1.2
  * @author Yi-Cyuan Chen [emn178@gmail.com]
  * @copyright Yi-Cyuan Chen 2015-2016
  * @license MIT
@@ -42,7 +42,7 @@
   KolorPicker.prototype.onSamplerSelect = function (color) {
     this.sampling = false;
     this.elements.canvas.colorSampler('disable');
-    this.colorPicker.color.setColor(color);
+    this.setColor(color);
     color = this.getColor();
     this.selectColor(color);
   };

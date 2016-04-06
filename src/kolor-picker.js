@@ -1,7 +1,7 @@
 /**
  * [kolor-picker]{@link https://github.com/emn178/kolor-picker}
  *
- * @version 0.1.2
+ * @version 0.2.0
  * @author Yi-Cyuan Chen [emn178@gmail.com]
  * @copyright Yi-Cyuan Chen 2015-2016
  * @license MIT
@@ -10,80 +10,60 @@
   'use strict';
 
   var KEY = 'kolor-picker';
+  var wrapper;
 
-  function KolorPicker(colorPicker) {
-    this.element = $('<div class="kolor-picker"><div class="sampler"></div><div class="preview-block"><input type="text"/><div class="preview-wrapper"><div class="preview" /></div></div></div>');
+  function Wrapper(element, colorPicker) {
+    this.element = element;
     this.colorPicker = colorPicker;
-    this.options = colorPicker.color.options;
+    this.previewElement = $('<div class="kolor-picker"><div class="sampler"></div><div class="preview-block"><input type="text"/><div class="preview-wrapper"><div class="preview" /></div></div></div>');
+    this.element.append(this.previewElement);
 
     var elements = {
-      trigger: colorPicker.$trigger,
-      preview: this.element.find('.preview'),
-      input: this.element.find('input'),
-      sampler: this.element.find('.sampler')
+      preview: this.previewElement.find('.preview'),
+      input: this.previewElement.find('input'),
+      sampler: this.previewElement.find('.sampler'),
+      alpha: this.element.find('.cp-alpha')
     };
     this.elements = elements;
-    elements.trigger.data(KEY, this);
+    elements.sampler.click(this.enableSampler.bind(this));
 
-    if (this.options.canvas) {
-      elements.canvas = $(this.options.canvas);
-      elements.canvas.colorSampler({
-        onSelect: this.onSamplerSelect.bind(this),
-        onPreview: this.onSamplerPreview.bind(this)
-      }).colorSampler('disable');
-      elements.sampler.click(this.enableSampler.bind(this));
-    } else {
-      elements.sampler.hide();
-    }
     this.sampling = false;
     this.lastToggled = false;
   }
 
-  KolorPicker.prototype.onSamplerSelect = function (color) {
-    this.sampling = false;
-    this.elements.canvas.colorSampler('disable');
-    this.setColor(color);
-    color = this.getColor();
-    this.selectColor(color);
-  };
-
-  KolorPicker.prototype.onSamplerPreview = function (color) {
-    this.elements.trigger.css('background-color', color);
-    color = this.getColor();
-    this.changeColor(color);
-  };
-
-  KolorPicker.prototype.selectColor = function (color) {
-    if ($.isFunction(this.options.onSelect)) {
-      this.options.onSelect.call(this.colorPicker, color);
+  Wrapper.prototype.enableSampler = function () {
+    if (!this.kolorPicker.canvas) {
+      return;
     }
-  };
-
-  KolorPicker.prototype.changeColor = function (color) {
-    if ($.isFunction(this.options.onChange)) {
-      this.options.onChange.call(this.colorPicker, color);
-    }
-  };
-
-  KolorPicker.prototype.enableSampler = function () {
-    this.elements.canvas.colorSampler('enable');
+    this.kolorPicker.canvas.colorSampler('enable');
     this.sampling = true;
     this.colorPicker.toggle(false);
   };
 
-  KolorPicker.prototype.getColor = function () {
+  Wrapper.prototype.setKolorPicker = function (kolorPicker) {
+    this.kolorPicker = kolorPicker;
+    this.elements.sampler.toggle(!!kolorPicker.canvas);
+    this.elements.alpha.toggle(kolorPicker.options.opacity !== false);
+    if (kolorPicker.options.doRender === undefined) {
+      this.colorPicker.color.options.doRender = true;
+    } else {
+      this.colorPicker.color.options.doRender = kolorPicker.options.doRender;
+    }
+  };
+
+  Wrapper.prototype.getColor = function () {
     var rgb = this.colorPicker.color.colors.rgb;
     return 'rgba(' + [parseInt(rgb.r * 255), parseInt(rgb.g * 255), parseInt(rgb.b * 255), this.colorPicker.color.colors.alpha.toFixed(2)].join(',') + ')';
   };
 
-  KolorPicker.prototype.updateColor = function () {
+  Wrapper.prototype.updateColor = function () {
     var color = this.getColor();
     this.elements.preview.css('background-color', color);
     this.elements.input.val(color);
-    this.changeColor(color);
+    this.kolorPicker.changeColor(color);
   };
 
-  KolorPicker.prototype.render = function (element, toggled) {
+  Wrapper.prototype.render = function (toggled) {
     if (toggled === undefined) {
       this.updateColor();
     } else if (this.lastToggled === toggled) {
@@ -93,26 +73,70 @@
     if (toggled === false) {
       if (!this.sampling) {
         var color = this.getColor();
-        this.selectColor(color);
+        this.kolorPicker.selectColor(color);
       }
     } else {
       this.updateColor();
     }
   };
 
+  function KolorPicker(element, options) {
+    this.element = element;
+    this.options = options || {};
+
+    if (this.options.canvas) {
+      this.canvas = $(this.options.canvas);
+      this.canvas.colorSampler().colorSampler('disable')
+        .bind('sampler:preview', this.onSamplerPreview.bind(this))
+        .bind('sampler:select', this.onSamplerSelect.bind(this));
+    }
+  }
+
+  KolorPicker.prototype.onSamplerSelect = function (e, color) {
+    if (wrapper.kolorPicker != this) {
+      return;
+    }
+    wrapper.sampling = false;
+    this.canvas.colorSampler('disable');
+    this.setColor(color);
+    color = wrapper.getColor();
+    this.selectColor(color);
+  };
+
+  KolorPicker.prototype.onSamplerPreview = function (e, color) {
+    if (wrapper.kolorPicker != this) {
+      return;
+    }
+    this.element.css('background-color', color);
+    color = wrapper.getColor();
+    this.changeColor(color);
+  };
+
+  KolorPicker.prototype.selectColor = function (color) {
+    if ($.isFunction(this.options.onSelect)) {
+      this.options.onSelect.call(this.element, color);
+    }
+  };
+
+  KolorPicker.prototype.changeColor = function (color) {
+    if ($.isFunction(this.options.onChange)) {
+      this.options.onChange.call(this.element, color);
+    }
+  };
+
   KolorPicker.prototype.setColor = function (color) {
-    this.colorPicker.color.setColor(color);
-    this.colorPicker.render();
+    wrapper.colorPicker.color.setColor(color);
+    wrapper.colorPicker.render();
   };
 
   var KolorPickerOptions = {
     buildCallback: function (element) {
-      this.kolorPicker = new KolorPicker(this);
-      element.append(this.kolorPicker.element);
+      wrapper = new Wrapper(element, this);
     },
 
     renderCallback: function (element, toggled) {
-      this.kolorPicker.render(element, toggled);
+      wrapper.setKolorPicker($(element).data(KEY));
+      wrapper.render(toggled);
     }
   };
 
@@ -120,16 +144,22 @@
   $.fn.kolorPicker = function (options) {
     if (typeof (options) == 'string') {
       if ($.inArray(options, PublicMethods) != -1) {
-        var arg = Array.prototype.splice.call(arguments, 1);
+        var args = Array.prototype.splice.call(arguments, 1);
         this.each(function () {
           var kolorPicker = $(this).data(KEY);
           if (kolorPicker) {
-            return kolorPicker[options].apply(kolorPicker, arg);
+            return kolorPicker[options].apply(kolorPicker, args);
           }
         });
       }
     } else {
-      return this.colorPicker($.extend({ cssAddon: $.kolorPicker.css }, options, KolorPickerOptions));
+      this.each(function () {
+        var element = $(this);
+        if (!element.data(KEY)) {
+          return element.data(KEY, new KolorPicker(element, options))
+            .colorPicker($.extend({ cssAddon: $.kolorPicker.css }, options, KolorPickerOptions));
+        }
+      });
     }
     return this;
   };

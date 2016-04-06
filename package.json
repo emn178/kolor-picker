@@ -1,6 +1,6 @@
 {
   "name": "kolor-picker",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A tinyColorPicker plugin provides sampler function for Canvas.",
   "main": "build/kolor-picker.js",
   "devDependencies": {
@@ -24,7 +24,7 @@
     "sampler"
   ],
   "license": "MIT",
-  "author": "emn178 <emn178@gmail.com>",
+  "author": "Chen, Yi-Cyuan <emn178@gmail.com>",
   "homepage": "https://github.com/emn178/kolor-picker",
   "bugs": {
     "url": "https://github.com/emn178/kolor-picker/issues"

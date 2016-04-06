@@ -1,12 +1,12 @@
 {
   "name": "kolor-picker",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "main": ["src/kolor-picker.js"],
   "ignore": [
     "samples"
   ],
   "dependencies": {
     "jquery": ">= 1.6",
-    "color-sampler": ">= 0.1.3"
+    "color-sampler": ">= 0.1.5"
   }
 }

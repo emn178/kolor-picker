@@ -42,6 +42,7 @@
 
   Wrapper.prototype.setKolorPicker = function (kolorPicker) {
     this.kolorPicker = kolorPicker;
+    this.element.attr('data-theme', kolorPicker.theme);
     this.elements.sampler.toggle(!!kolorPicker.canvas);
     this.elements.alpha.toggle(kolorPicker.options.opacity !== false);
     if (kolorPicker.options.doRender === undefined) {
@@ -83,9 +84,11 @@
   function KolorPicker(element, options) {
     this.element = element;
     this.options = options || {};
+    this.canvas = this.options.canvas;
+    this.theme = this.options.theme || $.kolorPicker.theme;
 
-    if (this.options.canvas) {
-      this.canvas = $(this.options.canvas);
+    if (this.canvas) {
+      this.canvas = $(this.canvas);
       this.canvas.colorSampler().colorSampler('disable')
         .bind('sampler:preview', this.onSamplerPreview.bind(this))
         .bind('sampler:select', this.onSamplerSelect.bind(this));
@@ -165,6 +168,6 @@
   };
 
   $.kolorPicker = {
-    theme: {}
+    theme: ''
   };
 })(jQuery);

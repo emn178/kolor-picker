@@ -60,8 +60,10 @@ You can choose built-in themes by `cssAddon` options and `$.kolorPicker.theme`. 
 
 ## Example
 ```JavaScript
+$.kolorPicker.theme = 'light'; // default theme
+// or single picker
 $('#picker').kolorPicker({
-  cssAddon: $.kolorPicker.theme.light
+  theme: 'light'
 });
 $('#picker').kolorPicker('setColor', '#FF0000');
 ```

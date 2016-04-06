@@ -26,30 +26,43 @@ gulp.task('build', ['convert-css'], function () {
 gulp.task('convert-css', convertCss);
 
 function convertCss() {
-  return merge(getBaseCss(), getThemeCss())
+  var themes = getFiles('src/theme').map(function(file) {
+    return gulp.src('src/theme/' + file);
+  });
+  themes.unshift(gulp.src('src/kolor-picker.css'));
+  return merge(themes)
+    .pipe(concat('kolor-picker.css.js'))
+    .pipe(minifyCss({ compatibility: 'ie8' }))
+    .pipe(cssToJs({ variable: '$.kolorPicker.css' }))
     .pipe(concat('kolor-picker.css.js'))
     .pipe(gulp.dest('build'));
+
+
+
+  // return merge(getBaseCss(), getThemeCss())
+  //   .pipe(concat('kolor-picker.css.js'))
+  //   .pipe(gulp.dest('build'));
 }
 
-function getBaseCss() {
-  return gulp.src('src/kolor-picker.css')
-    .pipe(minifyCss({ compatibility: 'ie8' }))
-    .pipe(cssToJs({ variable: '$.kolorPicker.css' }));
-}
+// function getBaseCss() {
+//   return gulp.src('src/kolor-picker.css')
+//     .pipe(minifyCss({ compatibility: 'ie8' }))
+//     .pipe(cssToJs({ variable: '$.kolorPicker.css' }));
+// }
 
-function getThemeCss() {
-  var streams = [];
-  getFiles('src/theme').forEach(function(file) {
-    var theme = file.split('.')[0];
-    var variable = '$.kolorPicker.theme.' + theme;
-    var stream = gulp.src('src/theme/' + file)
-      .pipe(minifyCss({ compatibility: 'ie8' }))
-      .pipe(cssToJs({ variable: variable }))
-      .pipe(insert.append(variable + '=$.kolorPicker.css+' + variable + ';'));
-    streams.push(stream);
-  });
-  return streams;
-}
+// function getThemeCss() {
+//   var streams = [];
+//   getFiles('src/theme').forEach(function(file) {
+//     var theme = file.split('.')[0];
+//     var variable = '$.kolorPicker.theme.' + theme;
+//     var stream = gulp.src('src/theme/' + file)
+//       .pipe(minifyCss({ compatibility: 'ie8' }))
+//       .pipe(cssToJs({ variable: variable }))
+//       .pipe(insert.append(variable + '=$.kolorPicker.css+' + variable + ';'));
+//     streams.push(stream);
+//   });
+//   return streams;
+// }
 
 function getFiles(folder) {
   return fs.readdirSync(folder).filter(function(file) {

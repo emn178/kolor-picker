@@ -1,3 +1,9 @@
+# v0.2.1 / 2016-04-19
+
+* Fixed setColor problems.
+* Added getColor method.
+* Added events trigger.
+
 # v0.2.0 / 2016-04-06
 
 * Supported multiple instances.

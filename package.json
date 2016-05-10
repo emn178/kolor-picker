@@ -1,6 +1,6 @@
 {
   "name": "kolor-picker",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A tinyColorPicker plugin provides sampler function for Canvas.",
   "main": "build/kolor-picker.js",
   "devDependencies": {

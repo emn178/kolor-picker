@@ -1,7 +1,7 @@
 /**
  * [kolor-picker]{@link https://github.com/emn178/kolor-picker}
  *
- * @version 0.2.0
+ * @version 0.2.1
  * @author Yi-Cyuan Chen [emn178@gmail.com]
  * @copyright Yi-Cyuan Chen 2015-2016
  * @license MIT
@@ -86,6 +86,7 @@
     this.options = options || {};
     this.canvas = this.options.canvas;
     this.theme = this.options.theme || $.kolorPicker.theme;
+    this.color = this.element.css('background-color');
 
     if (this.canvas) {
       this.canvas = $(this.canvas);
@@ -116,20 +117,31 @@
   };
 
   KolorPicker.prototype.selectColor = function (color) {
+    this.color = color;
     if ($.isFunction(this.options.onSelect)) {
       this.options.onSelect.call(this.element, color);
     }
+    this.element.trigger('kolorPicker:select', color)
   };
 
   KolorPicker.prototype.changeColor = function (color) {
     if ($.isFunction(this.options.onChange)) {
       this.options.onChange.call(this.element, color);
     }
+    this.element.trigger('kolorPicker:change', color)
   };
 
-  KolorPicker.prototype.setColor = function (color) {
-    wrapper.colorPicker.color.setColor(color);
-    wrapper.colorPicker.render();
+  KolorPicker.prototype.setColor = function (color) {    
+    this.color = color;
+    this.element.css('background-color', color);
+    if (wrapper) {
+      wrapper.colorPicker.color.setColor(color);
+      wrapper.colorPicker.render();
+    }
+  };
+
+  KolorPicker.prototype.getColor = function () {
+    return this.color;
   };
 
   var KolorPickerOptions = {
@@ -143,17 +155,15 @@
     }
   };
 
-  var PublicMethods = ['setColor'];
+  var PublicMethods = ['setColor', 'getColor'];
   $.fn.kolorPicker = function (options) {
     if (typeof (options) == 'string') {
       if ($.inArray(options, PublicMethods) != -1) {
         var args = Array.prototype.splice.call(arguments, 1);
-        this.each(function () {
-          var kolorPicker = $(this).data(KEY);
-          if (kolorPicker) {
-            return kolorPicker[options].apply(kolorPicker, args);
-          }
-        });
+        var kolorPicker = $(this).data(KEY);
+        if (kolorPicker) {
+          return kolorPicker[options].apply(kolorPicker, args);
+        }
       }
     } else {
       this.each(function () {

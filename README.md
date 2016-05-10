@@ -45,11 +45,15 @@ $('#picker').kolorPicker({
 
 #### setColor(color)
 
-Set color to picker. This method only works after the picker has been initialized.
+Set color to picker.
 
 ##### *color: `String`*
 
 Color in hex or rgb format. It does not support color name like 'black' or 'white'.
+
+#### getColor()
+
+Get color from picker.
 
 ### Themes
 
@@ -66,6 +70,10 @@ $('#picker').kolorPicker({
   theme: 'light'
 });
 $('#picker').kolorPicker('setColor', '#FF0000');
+
+// events
+$('#picker').on('kolorPicker:select', function (e, color) { });
+$('#picker').on('kolorPicker:change', function (e, color) { });
 ```
 
 ## License

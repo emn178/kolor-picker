@@ -1,7 +1,7 @@
 /**
  * [kolor-picker]{@link https://github.com/emn178/kolor-picker}
  *
- * @version 0.2.1
+ * @version 0.2.2
  * @author Yi-Cyuan Chen [emn178@gmail.com]
  * @copyright Yi-Cyuan Chen 2015-2016
  * @license MIT
@@ -150,8 +150,11 @@
     },
 
     renderCallback: function (element, toggled) {
-      wrapper.setKolorPicker($(element).data(KEY));
-      wrapper.render(toggled);
+      var kolorPicker = $(element).data(KEY);
+      if (kolorPicker) {
+        wrapper.setKolorPicker(kolorPicker);
+        wrapper.render(toggled);
+      }
     }
   };
 

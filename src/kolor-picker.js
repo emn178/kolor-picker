@@ -1,9 +1,9 @@
 /**
  * [kolor-picker]{@link https://github.com/emn178/kolor-picker}
  *
- * @version 0.2.2
+ * @version 0.3.0
  * @author Yi-Cyuan Chen [emn178@gmail.com]
- * @copyright Yi-Cyuan Chen 2015-2016
+ * @copyright Yi-Cyuan Chen 2015-2021
  * @license MIT
  */
 (function ($) {
@@ -26,6 +26,7 @@
     };
     this.elements = elements;
     elements.sampler.click(this.enableSampler.bind(this));
+    elements.input.change(this.onInputChange.bind(this));
 
     this.sampling = false;
     this.lastToggled = false;
@@ -38,6 +39,10 @@
     this.kolorPicker.canvas.colorSampler('enable');
     this.sampling = true;
     this.colorPicker.toggle(false);
+  };
+
+  Wrapper.prototype.onInputChange = function () {
+    this.kolorPicker.setColor(this.elements.input.val());
   };
 
   Wrapper.prototype.setKolorPicker = function (kolorPicker) {
@@ -131,7 +136,7 @@
     this.element.trigger('kolorPicker:change', color)
   };
 
-  KolorPicker.prototype.setColor = function (color) {    
+  KolorPicker.prototype.setColor = function (color) {
     this.color = color;
     this.element.css('background-color', color);
     if (wrapper) {

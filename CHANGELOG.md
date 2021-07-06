@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.3.0 / 2021-07-06
+### Added
+- set color from input.
+
 ## v0.2.2 / 2016-10-24
 ### Fixed
 - setKolorPicker error.

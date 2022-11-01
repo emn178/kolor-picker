@@ -7,7 +7,7 @@
     "build": "gulp build"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.2",
     "gulp-concat": "^2.6.0",
     "gulp-css-to-js": "git://github.com/emn178/gulp-css-to-js.git",
     "gulp-insert": "^0.5.0",
